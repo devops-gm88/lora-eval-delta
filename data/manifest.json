@@ -1,0 +1,18 @@
+{
+  "seed": 20261103,
+  "splits": {
+    "train": {
+      "documents": 600,
+      "sha256": "0112cea49a4ca88c2c530e00f5ff1068b8fa07f183643b6fca2484ad034ed140"
+    },
+    "valid": {
+      "documents": 100,
+      "sha256": "550e0bf7cf171d8250a20ee24be03211380a653fade2e98b8874f6b4d1237ae3"
+    },
+    "test": {
+      "documents": 100,
+      "sha256": "e40add7a19843166c30022f2a436d08068e861ecba17d0fc9c10964cfbcaf547"
+    }
+  },
+  "system_prompt": "You extract structured fields from messy invoice text. Reply with one JSON object and nothing else. Keys: vendor, date, total, currency. date is YYYY-MM-DD. total is a number with two decimals. currency is one of USD, EUR, CAD, GBP."
+}

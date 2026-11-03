@@ -1,0 +1,2263 @@
+{
+  "task": "structured field extraction from synthetic invoice text",
+  "model": "mlx-community/Qwen2.5-0.5B-Instruct-4bit",
+  "adapter": {
+    "items": 100,
+    "exact_match": 1.0,
+    "field_precision": 1.0,
+    "field_recall": 1.0,
+    "field_f1": 1.0,
+    "invalid_json": 0,
+    "per_field_accuracy": {
+      "vendor": 1.0,
+      "date": 1.0,
+      "total": 1.0,
+      "currency": 1.0
+    }
+  },
+  "test_items": 100,
+  "decoding": {
+    "temperature": 0.0,
+    "max_tokens": 160,
+    "seed": 20261103
+  },
+  "verifier": "scripts/extraction.py (deterministic; no LLM judge)",
+  "environment": {
+    "date": "2026-11-03",
+    "python": "3.14.7",
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O"
+  },
+  "base": {
+    "items": 100,
+    "exact_match": 0.35,
+    "field_precision": 0.9325,
+    "field_recall": 0.38,
+    "field_f1": 0.54,
+    "invalid_json": 61,
+    "per_field_accuracy": {
+      "vendor": 0.39,
+      "date": 0.39,
+      "total": 0.38,
+      "currency": 0.36
+    }
+  },
+  "delta": {
+    "exact_match_delta": 0.65,
+    "exact_match_ci95": [
+      0.55,
+      0.74
+    ],
+    "field_f1_delta": 0.46,
+    "field_f1_ci95": [
+      0.3707,
+      0.5641
+    ],
+    "resamples": 2000,
+    "seed": 20261103
+  },
+  "rows": [
+    {
+      "id": "D0700",
+      "truth": {
+        "vendor": "Foundry Trading",
+        "date": "2024-06-26",
+        "total": 2784.89,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Foundry Trading\",\n  \"date\": \"2024-06-26\",\n  \"total\": 915.6,\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"EUR\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"vendor\": \"Foundry Trading\",\n  \"date\": \"2",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Foundry Trading\", \"date\": \"2024-06-26\", \"total\": 2784.89, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Foundry Trading",
+        "date": "2024-06-26",
+        "total": 2784.89,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0701",
+      "truth": {
+        "vendor": "Alder Works",
+        "date": "2024-09-07",
+        "total": 101.56,
+        "currency": "USD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Alder Works\",\n  \"date\": \"2024-09-07\",\n  \"total\": 101.56,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Alder Works\", \"date\": \"2024-09-07\", \"total\": 101.56, \"currency\": \"USD\"}",
+      "adapter_parsed": {
+        "vendor": "Alder Works",
+        "date": "2024-09-07",
+        "total": 101.56,
+        "currency": "USD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0702",
+      "truth": {
+        "vendor": "Willow Foods",
+        "date": "2026-03-20",
+        "total": 4116.84,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Willow Foods\",\n  \"date\": \"20 Mar 2026\",\n  \"total\": 2712.46,\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Willow Foods\", \"date\": \"2026-03-20\", \"total\": 4116.84, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Willow Foods",
+        "date": "2026-03-20",
+        "total": 4116.84,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0703",
+      "truth": {
+        "vendor": "Ember Parts",
+        "date": "2026-05-05",
+        "total": 4614.21,
+        "currency": "USD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Ember Parts\",\n  \"date\": \"2026-05-05\",\n  \"total\": 4614.21,\n  \"currency\": \"USD\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Ember Parts",
+        "date": "2026-05-05",
+        "total": 4614.21,
+        "currency": "USD"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Ember Parts\", \"date\": \"2026-05-05\", \"total\": 4614.21, \"currency\": \"USD\"}",
+      "adapter_parsed": {
+        "vendor": "Ember Parts",
+        "date": "2026-05-05",
+        "total": 4614.21,
+        "currency": "USD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0704",
+      "truth": {
+        "vendor": "Drift Supply",
+        "date": "2025-03-30",
+        "total": 3872.53,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Drift Supply\",\n  \"date\": \"2025-03-30\",\n  \"total\": 1895.38,\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Drift Supply\", \"date\": \"2025-03-30\", \"total\": 3872.53, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Drift Supply",
+        "date": "2025-03-30",
+        "total": 3872.53,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0705",
+      "truth": {
+        "vendor": "Sable Supply",
+        "date": "2024-08-03",
+        "total": 6817.56,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Sable Supply\",\n  \"date\": \"2024-08-03\",\n  \"total\": 485.18,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Sable Supply\", \"date\": \"2024-08-03\", \"total\": 6817.56, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Sable Supply",
+        "date": "2024-08-03",
+        "total": 6817.56,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0706",
+      "truth": {
+        "vendor": "Zephyr Logistics",
+        "date": "2025-08-17",
+        "total": 3685.16,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Zephyr Logistics\",\n  \"date\": \"2025-08-17\",\n  \"total\": 1916.24,\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Zephyr Logistics\", \"date\": \"2025-08-17\", \"total\": 3685.16, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Zephyr Logistics",
+        "date": "2025-08-17",
+        "total": 3685.16,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0707",
+      "truth": {
+        "vendor": "Tamarack Trading",
+        "date": "2026-03-20",
+        "total": 5204.7,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Tamarack Trading\",\n  \"date\": \"2026-03-20\",\n  \"total\": 5204.7,\n  \"currency\": \"GBP\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Tamarack Trading",
+        "date": "2026-03-20",
+        "total": 5204.7,
+        "currency": "GBP"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Tamarack Trading\", \"date\": \"2026-03-20\", \"total\": 5204.7, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Tamarack Trading",
+        "date": "2026-03-20",
+        "total": 5204.7,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0708",
+      "truth": {
+        "vendor": "Mica Works",
+        "date": "2024-08-14",
+        "total": 5820.52,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Mica Works\",\n  \"date\": \"2024-08-14\",\n  \"total\": 2400.52,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Mica Works\", \"date\": \"2024-08-14\", \"total\": 5820.52, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Mica Works",
+        "date": "2024-08-14",
+        "total": 5820.52,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0709",
+      "truth": {
+        "vendor": "Larkspur Industrial",
+        "date": "2025-09-20",
+        "total": 5333.45,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Larkspur Industrial\",\n  \"date\": \"20 Sep 2025\",\n  \"total\": 807.48,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Larkspur Industrial\", \"date\": \"2025-09-20\", \"total\": 5333.45, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Larkspur Industrial",
+        "date": "2025-09-20",
+        "total": 5333.45,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0710",
+      "truth": {
+        "vendor": "Ridge Trading",
+        "date": "2025-11-13",
+        "total": 6183.27,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Ridge Trading\",\n  \"date\": \"2025-11-13\",\n  \"total\": 6183.27,\n  \"currency\": \"EUR\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Ridge Trading",
+        "date": "2025-11-13",
+        "total": 6183.27,
+        "currency": "EUR"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Ridge Trading\", \"date\": \"2025-11-13\", \"total\": 6183.27, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Ridge Trading",
+        "date": "2025-11-13",
+        "total": 6183.27,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0711",
+      "truth": {
+        "vendor": "Sable Systems",
+        "date": "2024-03-30",
+        "total": 855.59,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Sable Systems\",\n  \"date\": \"2024-03-30\",\n  \"total\": 855.59,\n  \"currency\": \"GBP\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Sable Systems",
+        "date": "2024-03-30",
+        "total": 855.59,
+        "currency": "GBP"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Sable Systems\", \"date\": \"2024-03-30\", \"total\": 855.59, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Sable Systems",
+        "date": "2024-03-30",
+        "total": 855.59,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0712",
+      "truth": {
+        "vendor": "Orchard Foods",
+        "date": "2026-06-18",
+        "total": 3481.25,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Orchard Foods\",\n  \"date\": \"2026-06-18\",\n  \"total\": 3481.25,\n  \"currency\": \"GBP\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Orchard Foods",
+        "date": "2026-06-18",
+        "total": 3481.25,
+        "currency": "GBP"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Orchard Foods\", \"date\": \"2026-06-18\", \"total\": 3481.25, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Orchard Foods",
+        "date": "2026-06-18",
+        "total": 3481.25,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0713",
+      "truth": {
+        "vendor": "Kestrel Systems",
+        "date": "2024-12-11",
+        "total": 5390.03,
+        "currency": "CAD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Kestrel Systems\",\n  \"date\": \"11 Dec 2024\",\n  \"total\": 2961.17,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"vendor\": \"Kestrel Systems\",\n  \"date\":",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Kestrel Systems\", \"date\": \"2024-12-11\", \"total\": 5390.03, \"currency\": \"CAD\"}",
+      "adapter_parsed": {
+        "vendor": "Kestrel Systems",
+        "date": "2024-12-11",
+        "total": 5390.03,
+        "currency": "CAD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0714",
+      "truth": {
+        "vendor": "Copper Systems",
+        "date": "2026-05-04",
+        "total": 654.58,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Copper Systems\",\n  \"date\": \"04 May 2026\",\n  \"total\": 654.58,\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"EUR\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"EUR\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"EUR\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"EUR\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Copper Systems\", \"date\": \"2026-05-04\", \"total\": 654.58, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Copper Systems",
+        "date": "2026-05-04",
+        "total": 654.58,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0715",
+      "truth": {
+        "vendor": "Sable Parts",
+        "date": "2024-04-13",
+        "total": 1434.53,
+        "currency": "CAD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Sable Parts\",\n  \"date\": \"2024-04-13\",\n  \"total\": 1434.53,\n  \"currency\": \"CAD\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Sable Parts",
+        "date": "2024-04-13",
+        "total": 1434.53,
+        "currency": "CAD"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Sable Parts\", \"date\": \"2024-04-13\", \"total\": 1434.53, \"currency\": \"CAD\"}",
+      "adapter_parsed": {
+        "vendor": "Sable Parts",
+        "date": "2024-04-13",
+        "total": 1434.53,
+        "currency": "CAD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0716",
+      "truth": {
+        "vendor": "Orchard Works",
+        "date": "2024-02-18",
+        "total": 4495.11,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Orchard Works\",\n  \"date\": \"2024-02-18\",\n  \"total\": 2732.22,\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"date\": \"2024-02-18\",\n  \"date\": \"2024-02-18\",\n  \"date\": \"2024-02-18\",\n  \"date\": \"2024-02-18\",\n  \"date\": \"2024-02-18\",\n  \"date\": \"2024",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Orchard Works\", \"date\": \"2024-02-18\", \"total\": 4495.11, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Orchard Works",
+        "date": "2024-02-18",
+        "total": 4495.11,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0717",
+      "truth": {
+        "vendor": "Birch Parts",
+        "date": "2026-04-17",
+        "total": 7641.44,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Birch Parts\",\n  \"date\": \"2026-04-17\",\n  \"total\": 2568.58,\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"CAD\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"CAD\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"vendor\": \"Birch Parts\",\n  \"",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Birch Parts\", \"date\": \"2026-04-17\", \"total\": 7641.44, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Birch Parts",
+        "date": "2026-04-17",
+        "total": 7641.44,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0718",
+      "truth": {
+        "vendor": "Juniper Supply",
+        "date": "2025-11-02",
+        "total": 7556.68,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Juniper Supply\",\n  \"date\": \"2025-11-02\",\n  \"total\": 2126.19,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Juniper Supply\", \"date\": \"2025-11-02\", \"total\": 7556.68, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Juniper Supply",
+        "date": "2025-11-02",
+        "total": 7556.68,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0719",
+      "truth": {
+        "vendor": "Zephyr Parts",
+        "date": "2025-08-09",
+        "total": 8400.64,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Zephyr Parts\",\n  \"date\": \"2025-08-09\",\n  \"total\": 1597.75,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"vendor\": \"Zephyr Parts\",\n  \"date\": \"2025-08-09\",\n  \"total\": 15",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Zephyr Parts\", \"date\": \"2025-08-09\", \"total\": 8400.64, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Zephyr Parts",
+        "date": "2025-08-09",
+        "total": 8400.64,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0720",
+      "truth": {
+        "vendor": "Pinecrest Trading",
+        "date": "2024-12-19",
+        "total": 1085.99,
+        "currency": "USD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Pinecrest Trading\",\n  \"date\": \"2024-12-19\",\n  \"total\": 1165.24,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Pinecrest Trading\", \"date\": \"2024-12-19\", \"total\": 1085.99, \"currency\": \"USD\"}",
+      "adapter_parsed": {
+        "vendor": "Pinecrest Trading",
+        "date": "2024-12-19",
+        "total": 1085.99,
+        "currency": "USD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0721",
+      "truth": {
+        "vendor": "Union Trading",
+        "date": "2024-05-26",
+        "total": 6132.87,
+        "currency": "USD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Union Trading\",\n  \"date\": \"26 May 2024\",\n  \"total\": 6132.87,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Union Trading\", \"date\": \"2024-05-26\", \"total\": 6132.87, \"currency\": \"USD\"}",
+      "adapter_parsed": {
+        "vendor": "Union Trading",
+        "date": "2024-05-26",
+        "total": 6132.87,
+        "currency": "USD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0722",
+      "truth": {
+        "vendor": "Tamarack Supply",
+        "date": "2025-11-19",
+        "total": 7881.8,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Tamarack Supply\",\n  \"date\": \"19/11/2025\",\n  \"total\": 7881.80,\n  \"currency\": \"GBP\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Tamarack Supply",
+        "date": "19/11/2025",
+        "total": 7881.8,
+        "currency": "GBP"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Tamarack Supply\", \"date\": \"2025-11-19\", \"total\": 7881.8, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Tamarack Supply",
+        "date": "2025-11-19",
+        "total": 7881.8,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0723",
+      "truth": {
+        "vendor": "Ember Logistics",
+        "date": "2024-07-20",
+        "total": 9061.67,
+        "currency": "CAD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Ember Logistics\",\n  \"date\": \"2024-07-20\",\n  \"total\": 9061.67,\n  \"currency\": \"CAD\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Ember Logistics",
+        "date": "2024-07-20",
+        "total": 9061.67,
+        "currency": "CAD"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Ember Logistics\", \"date\": \"2024-07-20\", \"total\": 9061.67, \"currency\": \"CAD\"}",
+      "adapter_parsed": {
+        "vendor": "Ember Logistics",
+        "date": "2024-07-20",
+        "total": 9061.67,
+        "currency": "CAD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0724",
+      "truth": {
+        "vendor": "Foundry Supply",
+        "date": "2025-02-13",
+        "total": 7590.9,
+        "currency": "CAD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Foundry Supply\",\n  \"date\": \"2025-02-13\",\n  \"total\": 7590.9,\n  \"currency\": \"CAD\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"GBP\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Foundry Supply",
+        "date": "2025-02-13",
+        "total": 7590.9,
+        "currency": "GBP"
+      },
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Foundry Supply\", \"date\": \"2025-02-13\", \"total\": 7590.9, \"currency\": \"CAD\"}",
+      "adapter_parsed": {
+        "vendor": "Foundry Supply",
+        "date": "2025-02-13",
+        "total": 7590.9,
+        "currency": "CAD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0725",
+      "truth": {
+        "vendor": "Northline Parts",
+        "date": "2026-02-09",
+        "total": 4786.23,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Northline Parts\",\n  \"date\": \"2026-02-09\",\n  \"total\": 4786.23,\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"EUR\",\n  \"currency\": \"CAD\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"vendor\": \"Northline Parts\",\n  \"date\": \"2026-02-09\",\n  \"",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Northline Parts\", \"date\": \"2026-02-09\", \"total\": 4786.23, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Northline Parts",
+        "date": "2026-02-09",
+        "total": 4786.23,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0726",
+      "truth": {
+        "vendor": "Quarry Industrial",
+        "date": "2024-01-15",
+        "total": 8713.91,
+        "currency": "USD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Quarry Industrial\",\n  \"date\": \"2024-01-15\",\n  \"total\": 8713.91,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Quarry Industrial\", \"date\": \"2024-01-15\", \"total\": 8713.91, \"currency\": \"USD\"}",
+      "adapter_parsed": {
+        "vendor": "Quarry Industrial",
+        "date": "2024-01-15",
+        "total": 8713.91,
+        "currency": "USD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0727",
+      "truth": {
+        "vendor": "Foundry Logistics",
+        "date": "2026-01-16",
+        "total": 250.23,
+        "currency": "USD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Foundry Logistics\",\n  \"date\": \"16 Jan 2026\",\n  \"total\": 250.23,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Foundry Logistics\", \"date\": \"2026-01-16\", \"total\": 250.23, \"currency\": \"USD\"}",
+      "adapter_parsed": {
+        "vendor": "Foundry Logistics",
+        "date": "2026-01-16",
+        "total": 250.23,
+        "currency": "USD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0728",
+      "truth": {
+        "vendor": "Harbor Foods",
+        "date": "2025-03-17",
+        "total": 6339.76,
+        "currency": "USD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Harbor Foods\",\n  \"date\": \"2025-03-17\",\n  \"total\": 6339.76,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Harbor Foods\", \"date\": \"2025-03-17\", \"total\": 6339.76, \"currency\": \"USD\"}",
+      "adapter_parsed": {
+        "vendor": "Harbor Foods",
+        "date": "2025-03-17",
+        "total": 6339.76,
+        "currency": "USD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0729",
+      "truth": {
+        "vendor": "Drift Materials",
+        "date": "2025-07-23",
+        "total": 1517.78,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Drift Materials\",\n  \"date\": \"23/07/2025\",\n  \"total\": 2745.70,\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"EUR\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Drift Materials\", \"date\": \"2025-07-23\", \"total\": 1517.78, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Drift Materials",
+        "date": "2025-07-23",
+        "total": 1517.78,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0730",
+      "truth": {
+        "vendor": "Vantage Works",
+        "date": "2025-07-24",
+        "total": 7008.55,
+        "currency": "CAD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Vantage Works\",\n  \"date\": \"2025-07-24\",\n  \"total\": 263.21,\n  \"currency\": \"USD\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Vantage Works",
+        "date": "2025-07-24",
+        "total": 263.21,
+        "currency": "USD"
+      },
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Vantage Works\", \"date\": \"2025-07-24\", \"total\": 7008.55, \"currency\": \"CAD\"}",
+      "adapter_parsed": {
+        "vendor": "Vantage Works",
+        "date": "2025-07-24",
+        "total": 7008.55,
+        "currency": "CAD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0731",
+      "truth": {
+        "vendor": "Drift Parts",
+        "date": "2025-02-25",
+        "total": 6377.78,
+        "currency": "CAD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Drift Parts\",\n  \"date\": \"2025-02-25\",\n  \"total\": 6377.78,\n  \"currency\": \"CAD\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Drift Parts",
+        "date": "2025-02-25",
+        "total": 6377.78,
+        "currency": "CAD"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Drift Parts\", \"date\": \"2025-02-25\", \"total\": 6377.78, \"currency\": \"CAD\"}",
+      "adapter_parsed": {
+        "vendor": "Drift Parts",
+        "date": "2025-02-25",
+        "total": 6377.78,
+        "currency": "CAD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0732",
+      "truth": {
+        "vendor": "Fathom Industrial",
+        "date": "2024-06-24",
+        "total": 4302.01,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Fathom Industrial\",\n  \"date\": \"2024-06-24\",\n  \"total\": 979.36,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Fathom Industrial\", \"date\": \"2024-06-24\", \"total\": 4302.01, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Fathom Industrial",
+        "date": "2024-06-24",
+        "total": 4302.01,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0733",
+      "truth": {
+        "vendor": "Orchard Logistics",
+        "date": "2024-04-03",
+        "total": 3585.95,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Orchard Logistics\",\n  \"date\": \"2024-04-03\",\n  \"total\": 447.12,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Orchard Logistics\", \"date\": \"2024-04-03\", \"total\": 3585.95, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Orchard Logistics",
+        "date": "2024-04-03",
+        "total": 3585.95,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0734",
+      "truth": {
+        "vendor": "Mica Industrial",
+        "date": "2025-08-31",
+        "total": 5960.34,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Mica Industrial\",\n  \"date\": \"2025-08-31\",\n  \"total\": 5960.34,\n  \"currency\": \"USD\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Mica Industrial",
+        "date": "2025-08-31",
+        "total": 5960.34,
+        "currency": "USD"
+      },
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Mica Industrial\", \"date\": \"2025-08-31\", \"total\": 5960.34, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Mica Industrial",
+        "date": "2025-08-31",
+        "total": 5960.34,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0735",
+      "truth": {
+        "vendor": "Orchard Systems",
+        "date": "2026-01-19",
+        "total": 1464.77,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Orchard Systems\",\n  \"date\": \"19/01/2026\",\n  \"total\": 3114.89,\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Orchard Systems\", \"date\": \"2026-01-19\", \"total\": 1464.77, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Orchard Systems",
+        "date": "2026-01-19",
+        "total": 1464.77,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0736",
+      "truth": {
+        "vendor": "Yarrow Distribution",
+        "date": "2024-03-20",
+        "total": 2601.98,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Yarrow Distribution\",\n  \"date\": \"2024-03-20\",\n  \"total\": 1941.29,\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"EUR\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"vendor\": \"Yarrow Distribution\",\n  \"date\":",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Yarrow Distribution\", \"date\": \"2024-03-20\", \"total\": 2601.98, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Yarrow Distribution",
+        "date": "2024-03-20",
+        "total": 2601.98,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0737",
+      "truth": {
+        "vendor": "Birch Parts",
+        "date": "2025-06-20",
+        "total": 2643.54,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Birch Parts\",\n  \"date\": \"20/06/2025\",\n  \"total\": 1984.90,\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"date\": \"20/06/2025\",\n  \"date\": \"20/06/2025\",\n  \"date\": \"20/06/2025\",\n  \"date\": \"20/06/2025\",\n  \"date\": \"20/06/2025\",\n  \"date\": \"20/0",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Birch Parts\", \"date\": \"2025-06-20\", \"total\": 2643.54, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Birch Parts",
+        "date": "2025-06-20",
+        "total": 2643.54,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0738",
+      "truth": {
+        "vendor": "Pinecrest Supply",
+        "date": "2026-04-23",
+        "total": 2932.04,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Pinecrest Supply\",\n  \"date\": \"23/04/2026\",\n  \"total\": 4073.94,\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Pinecrest Supply\", \"date\": \"2026-04-23\", \"total\": 2932.04, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Pinecrest Supply",
+        "date": "2026-04-23",
+        "total": 2932.04,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0739",
+      "truth": {
+        "vendor": "Ridge Parts",
+        "date": "2024-04-11",
+        "total": 5113.38,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Ridge Parts\",\n  \"date\": \"2024-04-11\",\n  \"total\": 4622.33,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Ridge Parts\", \"date\": \"2024-04-11\", \"total\": 5113.38, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Ridge Parts",
+        "date": "2024-04-11",
+        "total": 5113.38,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0740",
+      "truth": {
+        "vendor": "Mica Works",
+        "date": "2026-03-18",
+        "total": 9424.61,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Mica Works\",\n  \"date\": \"18 Mar 2026\",\n  \"total\": 4095.62,\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"EUR\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Mica Works\", \"date\": \"2026-03-18\", \"total\": 9424.61, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Mica Works",
+        "date": "2026-03-18",
+        "total": 9424.61,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0741",
+      "truth": {
+        "vendor": "Juniper Foods",
+        "date": "2025-06-24",
+        "total": 823.32,
+        "currency": "USD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Juniper Foods\",\n  \"date\": \"2025-06-24\",\n  \"total\": 823.32,\n  \"currency\": \"USD\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Juniper Foods",
+        "date": "2025-06-24",
+        "total": 823.32,
+        "currency": "USD"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Juniper Foods\", \"date\": \"2025-06-24\", \"total\": 823.32, \"currency\": \"USD\"}",
+      "adapter_parsed": {
+        "vendor": "Juniper Foods",
+        "date": "2025-06-24",
+        "total": 823.32,
+        "currency": "USD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0742",
+      "truth": {
+        "vendor": "Mica Works",
+        "date": "2024-01-22",
+        "total": 9626.64,
+        "currency": "USD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Mica Works\",\n  \"date\": \"2024-01-22\",\n  \"total\": 9626.64,\n  \"currency\": \"USD\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Mica Works",
+        "date": "2024-01-22",
+        "total": 9626.64,
+        "currency": "USD"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Mica Works\", \"date\": \"2024-01-22\", \"total\": 9626.64, \"currency\": \"USD\"}",
+      "adapter_parsed": {
+        "vendor": "Mica Works",
+        "date": "2024-01-22",
+        "total": 9626.64,
+        "currency": "USD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0743",
+      "truth": {
+        "vendor": "Alder Materials",
+        "date": "2025-10-24",
+        "total": 6267.65,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Alder Materials\",\n  \"date\": \"2025-10-24\",\n  \"total\": 6267.65,\n  \"currency\": \"GBP\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Alder Materials",
+        "date": "2025-10-24",
+        "total": 6267.65,
+        "currency": "GBP"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Alder Materials\", \"date\": \"2025-10-24\", \"total\": 6267.65, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Alder Materials",
+        "date": "2025-10-24",
+        "total": 6267.65,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0744",
+      "truth": {
+        "vendor": "Elm Foods",
+        "date": "2025-02-28",
+        "total": 39.84,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Elm Foods\",\n  \"date\": \"2025-02-28\",\n  \"total\": 528.09,\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Elm Foods\", \"date\": \"2025-02-28\", \"total\": 39.84, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Elm Foods",
+        "date": "2025-02-28",
+        "total": 39.84,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0745",
+      "truth": {
+        "vendor": "Fathom Logistics",
+        "date": "2024-10-18",
+        "total": 5576.34,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Fathom Logistics\",\n  \"date\": \"18 Oct 2024\",\n  \"total\": 1719.90,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Fathom Logistics\", \"date\": \"2024-10-18\", \"total\": 5576.34, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Fathom Logistics",
+        "date": "2024-10-18",
+        "total": 5576.34,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0746",
+      "truth": {
+        "vendor": "Vantage Systems",
+        "date": "2024-06-18",
+        "total": 3559.17,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Vantage Systems\",\n  \"date\": \"2024-06-18\",\n  \"total\": 3559.17,\n  \"currency\": \"GBP\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Vantage Systems",
+        "date": "2024-06-18",
+        "total": 3559.17,
+        "currency": "GBP"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Vantage Systems\", \"date\": \"2024-06-18\", \"total\": 3559.17, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Vantage Systems",
+        "date": "2024-06-18",
+        "total": 3559.17,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0747",
+      "truth": {
+        "vendor": "Kestrel Logistics",
+        "date": "2026-04-26",
+        "total": 7169.49,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Kestrel Logistics\",\n  \"date\": \"2026-04-26\",\n  \"total\": 7169.49,\n  \"currency\": \"GBP\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Kestrel Logistics",
+        "date": "2026-04-26",
+        "total": 7169.49,
+        "currency": "GBP"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Kestrel Logistics\", \"date\": \"2026-04-26\", \"total\": 7169.49, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Kestrel Logistics",
+        "date": "2026-04-26",
+        "total": 7169.49,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0748",
+      "truth": {
+        "vendor": "Yarrow Industrial",
+        "date": "2024-04-30",
+        "total": 8262.06,
+        "currency": "CAD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Yarrow Industrial\",\n  \"date\": \"2024-04-30\",\n  \"total\": 8262.06,\n  \"currency\": \"CAD\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Yarrow Industrial",
+        "date": "2024-04-30",
+        "total": 8262.06,
+        "currency": "CAD"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Yarrow Industrial\", \"date\": \"2024-04-30\", \"total\": 8262.06, \"currency\": \"CAD\"}",
+      "adapter_parsed": {
+        "vendor": "Yarrow Industrial",
+        "date": "2024-04-30",
+        "total": 8262.06,
+        "currency": "CAD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0749",
+      "truth": {
+        "vendor": "Iron Systems",
+        "date": "2024-09-21",
+        "total": 3152.73,
+        "currency": "CAD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Iron Systems\",\n  \"date\": \"2024-09-21\",\n  \"total\": 3152.73,\n  \"currency\": \"CAD\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Iron Systems",
+        "date": "2024-09-21",
+        "total": 3152.73,
+        "currency": "CAD"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Iron Systems\", \"date\": \"2024-09-21\", \"total\": 3152.73, \"currency\": \"CAD\"}",
+      "adapter_parsed": {
+        "vendor": "Iron Systems",
+        "date": "2024-09-21",
+        "total": 3152.73,
+        "currency": "CAD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0750",
+      "truth": {
+        "vendor": "Cobalt Works",
+        "date": "2024-10-22",
+        "total": 331.88,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Cobalt Works\",\n  \"date\": \"22/10/2024\",\n  \"total\": 331.88,\n  \"currency\": \"GBP\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Cobalt Works",
+        "date": "22/10/2024",
+        "total": 331.88,
+        "currency": "GBP"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Cobalt Works\", \"date\": \"2024-10-22\", \"total\": 331.88, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Cobalt Works",
+        "date": "2024-10-22",
+        "total": 331.88,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0751",
+      "truth": {
+        "vendor": "Fathom Materials",
+        "date": "2025-11-28",
+        "total": 9458.07,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Fathom Materials\",\n  \"date\": \"28/11/2025\",\n  \"total\": 1957.33,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Fathom Materials\", \"date\": \"2025-11-28\", \"total\": 9458.07, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Fathom Materials",
+        "date": "2025-11-28",
+        "total": 9458.07,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0752",
+      "truth": {
+        "vendor": "Orchard Foods",
+        "date": "2025-01-26",
+        "total": 5834.39,
+        "currency": "CAD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Orchard Foods\",\n  \"date\": \"2025-01-26\",\n  \"total\": 5834.39,\n  \"currency\": \"CAD\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Orchard Foods",
+        "date": "2025-01-26",
+        "total": 5834.39,
+        "currency": "CAD"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Orchard Foods\", \"date\": \"2025-01-26\", \"total\": 5834.39, \"currency\": \"CAD\"}",
+      "adapter_parsed": {
+        "vendor": "Orchard Foods",
+        "date": "2025-01-26",
+        "total": 5834.39,
+        "currency": "CAD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0753",
+      "truth": {
+        "vendor": "Ridge Supply",
+        "date": "2025-01-15",
+        "total": 3369.71,
+        "currency": "USD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Ridge Supply\",\n  \"date\": \"2025-01-15\",\n  \"total\": 3369.71,\n  \"currency\": \"USD\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Ridge Supply",
+        "date": "2025-01-15",
+        "total": 3369.71,
+        "currency": "USD"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Ridge Supply\", \"date\": \"2025-01-15\", \"total\": 3369.71, \"currency\": \"USD\"}",
+      "adapter_parsed": {
+        "vendor": "Ridge Supply",
+        "date": "2025-01-15",
+        "total": 3369.71,
+        "currency": "USD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0754",
+      "truth": {
+        "vendor": "Pinecrest Foods",
+        "date": "2024-08-25",
+        "total": 5084.96,
+        "currency": "USD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Pinecrest Foods\",\n  \"date\": \"25 Aug 2024\",\n  \"total\": 1582.60,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Pinecrest Foods\", \"date\": \"2024-08-25\", \"total\": 5084.96, \"currency\": \"USD\"}",
+      "adapter_parsed": {
+        "vendor": "Pinecrest Foods",
+        "date": "2024-08-25",
+        "total": 5084.96,
+        "currency": "USD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0755",
+      "truth": {
+        "vendor": "Juniper Logistics",
+        "date": "2025-12-29",
+        "total": 2164.03,
+        "currency": "CAD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Juniper Logistics\",\n  \"date\": \"29/12/2025\",\n  \"total\": 6.66,\n  \"currency\": \"CAD\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Juniper Logistics\", \"date\": \"2025-12-29\", \"total\": 2164.03, \"currency\": \"CAD\"}",
+      "adapter_parsed": {
+        "vendor": "Juniper Logistics",
+        "date": "2025-12-29",
+        "total": 2164.03,
+        "currency": "CAD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0756",
+      "truth": {
+        "vendor": "Pinecrest Trading",
+        "date": "2025-05-10",
+        "total": 8679.8,
+        "currency": "USD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Pinecrest Trading\",\n  \"date\": \"2025-05-10\",\n  \"total\": 8679.8,\n  \"currency\": \"USD\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Pinecrest Trading",
+        "date": "2025-05-10",
+        "total": 8679.8,
+        "currency": "USD"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Pinecrest Trading\", \"date\": \"2025-05-10\", \"total\": 8679.8, \"currency\": \"USD\"}",
+      "adapter_parsed": {
+        "vendor": "Pinecrest Trading",
+        "date": "2025-05-10",
+        "total": 8679.8,
+        "currency": "USD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0757",
+      "truth": {
+        "vendor": "Beacon Works",
+        "date": "2025-10-07",
+        "total": 5134.7,
+        "currency": "USD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Beacon Works\",\n  \"date\": \"2025-10-07\",\n  \"total\": 5134.7,\n  \"currency\": \"USD\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Beacon Works",
+        "date": "2025-10-07",
+        "total": 5134.7,
+        "currency": "USD"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Beacon Works\", \"date\": \"2025-10-07\", \"total\": 5134.7, \"currency\": \"USD\"}",
+      "adapter_parsed": {
+        "vendor": "Beacon Works",
+        "date": "2025-10-07",
+        "total": 5134.7,
+        "currency": "USD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0758",
+      "truth": {
+        "vendor": "Zephyr Foods",
+        "date": "2025-05-02",
+        "total": 1233.42,
+        "currency": "CAD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Zephyr Foods\",\n  \"date\": \"2025-05-02\",\n  \"total\": 1233.42,\n  \"currency\": \"CAD\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Zephyr Foods",
+        "date": "2025-05-02",
+        "total": 1233.42,
+        "currency": "CAD"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Zephyr Foods\", \"date\": \"2025-05-02\", \"total\": 1233.42, \"currency\": \"CAD\"}",
+      "adapter_parsed": {
+        "vendor": "Zephyr Foods",
+        "date": "2025-05-02",
+        "total": 1233.42,
+        "currency": "CAD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0759",
+      "truth": {
+        "vendor": "Dawn Trading",
+        "date": "2025-06-11",
+        "total": 4627.53,
+        "currency": "CAD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Dawn Trading\",\n  \"date\": \"11 Jun 2025\",\n  \"total\": 212.28,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Dawn Trading\", \"date\": \"2025-06-11\", \"total\": 4627.53, \"currency\": \"CAD\"}",
+      "adapter_parsed": {
+        "vendor": "Dawn Trading",
+        "date": "2025-06-11",
+        "total": 4627.53,
+        "currency": "CAD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0760",
+      "truth": {
+        "vendor": "Union Systems",
+        "date": "2025-10-02",
+        "total": 4230.13,
+        "currency": "USD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Union Systems\",\n  \"date\": \"2025-10-02\",\n  \"total\": 3667.92,\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"vendor\": \"Union Systems\",\n  \"date\": \"2025-10-02\",\n  \"total\":",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Union Systems\", \"date\": \"2025-10-02\", \"total\": 4230.13, \"currency\": \"USD\"}",
+      "adapter_parsed": {
+        "vendor": "Union Systems",
+        "date": "2025-10-02",
+        "total": 4230.13,
+        "currency": "USD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0761",
+      "truth": {
+        "vendor": "Cobalt Systems",
+        "date": "2025-06-26",
+        "total": 3176.49,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Cobalt Systems\",\n  \"date\": \"26/06/2025\",\n  \"total\": 3176.49,\n  \"currency\": \"GBP\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Cobalt Systems",
+        "date": "26/06/2025",
+        "total": 3176.49,
+        "currency": "GBP"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Cobalt Systems\", \"date\": \"2025-06-26\", \"total\": 3176.49, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Cobalt Systems",
+        "date": "2025-06-26",
+        "total": 3176.49,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0762",
+      "truth": {
+        "vendor": "Orchard Industrial",
+        "date": "2024-07-07",
+        "total": 6871.71,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Orchard Industrial\",\n  \"date\": \"2024-07-07\",\n  \"total\": 1155.80,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Orchard Industrial\", \"date\": \"2024-07-07\", \"total\": 6871.71, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Orchard Industrial",
+        "date": "2024-07-07",
+        "total": 6871.71,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0763",
+      "truth": {
+        "vendor": "Pinecrest Industrial",
+        "date": "2025-12-06",
+        "total": 6006.42,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Pinecrest Industrial\",\n  \"date\": \"2025-12-06\",\n  \"total\": 2633.69,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Pinecrest Industrial\", \"date\": \"2025-12-06\", \"total\": 6006.42, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Pinecrest Industrial",
+        "date": "2025-12-06",
+        "total": 6006.42,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0764",
+      "truth": {
+        "vendor": "Vantage Works",
+        "date": "2024-10-01",
+        "total": 2336.26,
+        "currency": "USD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Vantage Works\",\n  \"date\": \"2024-10-01\",\n  \"total\": 2336.26,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Vantage Works\", \"date\": \"2024-10-01\", \"total\": 2336.26, \"currency\": \"USD\"}",
+      "adapter_parsed": {
+        "vendor": "Vantage Works",
+        "date": "2024-10-01",
+        "total": 2336.26,
+        "currency": "USD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0765",
+      "truth": {
+        "vendor": "Yarrow Materials",
+        "date": "2024-08-27",
+        "total": 1839.13,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Yarrow Materials\",\n  \"date\": \"27 Aug 2024\",\n  \"total\": 3701.64,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Yarrow Materials\", \"date\": \"2024-08-27\", \"total\": 1839.13, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Yarrow Materials",
+        "date": "2024-08-27",
+        "total": 1839.13,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0766",
+      "truth": {
+        "vendor": "Tamarack Distribution",
+        "date": "2025-10-01",
+        "total": 3356.7,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Tamarack Distribution\",\n  \"date\": \"2025-10-01\",\n  \"total\": 3356.7,\n  \"currency\": \"GBP\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Tamarack Distribution",
+        "date": "2025-10-01",
+        "total": 3356.7,
+        "currency": "GBP"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Tamarack Distribution\", \"date\": \"2025-10-01\", \"total\": 3356.7, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Tamarack Distribution",
+        "date": "2025-10-01",
+        "total": 3356.7,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0767",
+      "truth": {
+        "vendor": "Iron Industrial",
+        "date": "2026-05-15",
+        "total": 1257.74,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Iron Industrial\",\n  \"date\": \"2026-05-15\",\n  \"total\": 954.42,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Iron Industrial\", \"date\": \"2026-05-15\", \"total\": 1257.74, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Iron Industrial",
+        "date": "2026-05-15",
+        "total": 1257.74,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0768",
+      "truth": {
+        "vendor": "Kestrel Trading",
+        "date": "2025-02-15",
+        "total": 1190.61,
+        "currency": "CAD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Kestrel Trading\",\n  \"date\": \"15/02/2025\",\n  \"total\": 1190.61,\n  \"currency\": \"CAD\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"vendor\": \"Kestrel Trading\",\n  \"",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Kestrel Trading\", \"date\": \"2025-02-15\", \"total\": 1190.61, \"currency\": \"CAD\"}",
+      "adapter_parsed": {
+        "vendor": "Kestrel Trading",
+        "date": "2025-02-15",
+        "total": 1190.61,
+        "currency": "CAD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0769",
+      "truth": {
+        "vendor": "Cobalt Parts",
+        "date": "2024-12-15",
+        "total": 3040.02,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Cobalt Parts\",\n  \"date\": \"15/12/2024\",\n  \"total\": 2218.81,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Cobalt Parts\", \"date\": \"2024-12-15\", \"total\": 3040.02, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Cobalt Parts",
+        "date": "2024-12-15",
+        "total": 3040.02,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0770",
+      "truth": {
+        "vendor": "Beacon Industrial",
+        "date": "2025-05-30",
+        "total": 4519.55,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Beacon Industrial\",\n  \"date\": \"30/05/2025\",\n  \"total\": 592.35,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Beacon Industrial\", \"date\": \"2025-05-30\", \"total\": 4519.55, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Beacon Industrial",
+        "date": "2025-05-30",
+        "total": 4519.55,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0771",
+      "truth": {
+        "vendor": "Drift Foods",
+        "date": "2025-12-19",
+        "total": 5321.58,
+        "currency": "USD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Drift Foods\",\n  \"date\": \"19/12/2025\",\n  \"total\": 5321.58,\n  \"currency\": \"USD\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Drift Foods",
+        "date": "19/12/2025",
+        "total": 5321.58,
+        "currency": "USD"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Drift Foods\", \"date\": \"2025-12-19\", \"total\": 5321.58, \"currency\": \"USD\"}",
+      "adapter_parsed": {
+        "vendor": "Drift Foods",
+        "date": "2025-12-19",
+        "total": 5321.58,
+        "currency": "USD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0772",
+      "truth": {
+        "vendor": "Cobalt Materials",
+        "date": "2026-05-15",
+        "total": 9792.95,
+        "currency": "USD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Cobalt Materials\",\n  \"date\": \"15/05/2026\",\n  \"total\": 9792.95,\n  \"currency\": \"USD\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Cobalt Materials",
+        "date": "15/05/2026",
+        "total": 9792.95,
+        "currency": "USD"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Cobalt Materials\", \"date\": \"2026-05-15\", \"total\": 9792.95, \"currency\": \"USD\"}",
+      "adapter_parsed": {
+        "vendor": "Cobalt Materials",
+        "date": "2026-05-15",
+        "total": 9792.95,
+        "currency": "USD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0773",
+      "truth": {
+        "vendor": "Cobalt Trading",
+        "date": "2024-05-14",
+        "total": 9749.99,
+        "currency": "USD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Cobalt Trading\",\n  \"date\": \"2024-05-14\",\n  \"total\": 554.16,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Cobalt Trading\", \"date\": \"2024-05-14\", \"total\": 9749.99, \"currency\": \"USD\"}",
+      "adapter_parsed": {
+        "vendor": "Cobalt Trading",
+        "date": "2024-05-14",
+        "total": 9749.99,
+        "currency": "USD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0774",
+      "truth": {
+        "vendor": "Birch Materials",
+        "date": "2025-07-08",
+        "total": 1343.16,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Birch Materials\",\n  \"date\": \"2025-07-08\",\n  \"total\": 1343.16,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Birch Materials\", \"date\": \"2025-07-08\", \"total\": 1343.16, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Birch Materials",
+        "date": "2025-07-08",
+        "total": 1343.16,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0775",
+      "truth": {
+        "vendor": "Mica Logistics",
+        "date": "2024-03-09",
+        "total": 7283.4,
+        "currency": "USD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Mica Logistics\",\n  \"date\": \"2024-03-09\",\n  \"total\": 120.36,\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Mica Logistics\", \"date\": \"2024-03-09\", \"total\": 7283.4, \"currency\": \"USD\"}",
+      "adapter_parsed": {
+        "vendor": "Mica Logistics",
+        "date": "2024-03-09",
+        "total": 7283.4,
+        "currency": "USD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0776",
+      "truth": {
+        "vendor": "Ember Materials",
+        "date": "2024-05-05",
+        "total": 104.28,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Ember Materials\",\n  \"date\": \"2024-05-05\",\n  \"total\": 448.34,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"GBP\",\n  \"currency\": \"GBP\",",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Ember Materials\", \"date\": \"2024-05-05\", \"total\": 104.28, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Ember Materials",
+        "date": "2024-05-05",
+        "total": 104.28,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0777",
+      "truth": {
+        "vendor": "Quarry Supply",
+        "date": "2025-07-31",
+        "total": 4381.24,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \" Quarry Supply\",\n  \"date\": \"2025-07-31\",\n  \"total\": 4381.24,\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Quarry Supply\", \"date\": \"2025-07-31\", \"total\": 4381.24, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Quarry Supply",
+        "date": "2025-07-31",
+        "total": 4381.24,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0778",
+      "truth": {
+        "vendor": "Granite Materials",
+        "date": "2025-01-26",
+        "total": 9356.13,
+        "currency": "CAD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Granite Materials\",\n  \"date\": \"26 Jan 2025\",\n  \"total\": 448.16,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Granite Materials\", \"date\": \"2025-01-26\", \"total\": 9356.13, \"currency\": \"CAD\"}",
+      "adapter_parsed": {
+        "vendor": "Granite Materials",
+        "date": "2025-01-26",
+        "total": 9356.13,
+        "currency": "CAD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0779",
+      "truth": {
+        "vendor": "Elm Industrial",
+        "date": "2024-08-08",
+        "total": 7269.51,
+        "currency": "USD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Elm Industrial\",\n  \"date\": \"2024-08-08\",\n  \"total\": 7269.51,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"vendor\": \"Elm Industrial\",\n  \"date\": \"2024-0",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Elm Industrial\", \"date\": \"2024-08-08\", \"total\": 7269.51, \"currency\": \"USD\"}",
+      "adapter_parsed": {
+        "vendor": "Elm Industrial",
+        "date": "2024-08-08",
+        "total": 7269.51,
+        "currency": "USD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0780",
+      "truth": {
+        "vendor": "Drift Logistics",
+        "date": "2025-01-25",
+        "total": 8947.03,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Drift Logistics\",\n  \"date\": \"25/01/2025\",\n  \"total\": 2910.70,\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Drift Logistics\", \"date\": \"2025-01-25\", \"total\": 8947.03, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Drift Logistics",
+        "date": "2025-01-25",
+        "total": 8947.03,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0781",
+      "truth": {
+        "vendor": "Ember Trading",
+        "date": "2024-01-21",
+        "total": 1321.83,
+        "currency": "CAD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Ember Trading\",\n  \"date\": \"2024-01-21\",\n  \"total\": 3604.14,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Ember Trading\", \"date\": \"2024-01-21\", \"total\": 1321.83, \"currency\": \"CAD\"}",
+      "adapter_parsed": {
+        "vendor": "Ember Trading",
+        "date": "2024-01-21",
+        "total": 1321.83,
+        "currency": "CAD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0782",
+      "truth": {
+        "vendor": "Mica Logistics",
+        "date": "2025-05-01",
+        "total": 796.35,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Mica Logistics\",\n  \"date\": \"2025-05-01\",\n  \"total\": 69.02,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Mica Logistics\", \"date\": \"2025-05-01\", \"total\": 796.35, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Mica Logistics",
+        "date": "2025-05-01",
+        "total": 796.35,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0783",
+      "truth": {
+        "vendor": "Juniper Trading",
+        "date": "2026-02-10",
+        "total": 8724.33,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Juniper Trading\",\n  \"date\": \"2026-02-10\",\n  \"total\": 8724.33,\n  \"currency\": \"GBP\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Juniper Trading",
+        "date": "2026-02-10",
+        "total": 8724.33,
+        "currency": "GBP"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Juniper Trading\", \"date\": \"2026-02-10\", \"total\": 8724.33, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Juniper Trading",
+        "date": "2026-02-10",
+        "total": 8724.33,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0784",
+      "truth": {
+        "vendor": "Vantage Systems",
+        "date": "2024-04-30",
+        "total": 6814.5,
+        "currency": "CAD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Vantage Systems\",\n  \"date\": \"2024-04-30\",\n  \"total\": 1123.52,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Vantage Systems\", \"date\": \"2024-04-30\", \"total\": 6814.5, \"currency\": \"CAD\"}",
+      "adapter_parsed": {
+        "vendor": "Vantage Systems",
+        "date": "2024-04-30",
+        "total": 6814.5,
+        "currency": "CAD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0785",
+      "truth": {
+        "vendor": "Elm Foods",
+        "date": "2025-07-05",
+        "total": 7243.0,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Elm Foods\",\n  \"date\": \"2025-07-05\",\n  \"total\": 7243.00,\n  \"currency\": \"EUR\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Elm Foods",
+        "date": "2025-07-05",
+        "total": 7243.0,
+        "currency": "EUR"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Elm Foods\", \"date\": \"2025-07-05\", \"total\": 7243.0, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Elm Foods",
+        "date": "2025-07-05",
+        "total": 7243.0,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0786",
+      "truth": {
+        "vendor": "Pinecrest Foods",
+        "date": "2025-05-17",
+        "total": 736.32,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Pinecrest Foods\",\n  \"date\": \"17 May 2025\",\n  \"total\": 736.32,\n  \"currency\": \"EUR\",\n  \"hydraulic hose\": 6.80,\n  \"packing tape\": 12.74,\n  \"circuit board\": 39.86,\n  \"subtotal\": 278.32,\n  \"tax\": 36.18,\n  \"invoice total\": 736.32,\n  \"payment\": \"1000 EUR\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Pinecrest Foods",
+        "date": "17 May 2025",
+        "total": 736.32,
+        "currency": "EUR",
+        "hydraulic hose": 6.8,
+        "packing tape": 12.74,
+        "circuit board": 39.86,
+        "subtotal": 278.32,
+        "tax": 36.18,
+        "invoice total": 736.32,
+        "payment": "1000 EUR"
+      },
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Pinecrest Foods\", \"date\": \"2025-05-17\", \"total\": 736.32, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Pinecrest Foods",
+        "date": "2025-05-17",
+        "total": 736.32,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0787",
+      "truth": {
+        "vendor": "Sable Parts",
+        "date": "2024-02-17",
+        "total": 6020.42,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Sable Parts\",\n  \"date\": \"2024-02-17\",\n  \"total\": 6020.42,\n  \"currency\": \"GBP\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Sable Parts",
+        "date": "2024-02-17",
+        "total": 6020.42,
+        "currency": "GBP"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Sable Parts\", \"date\": \"2024-02-17\", \"total\": 6020.42, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Sable Parts",
+        "date": "2024-02-17",
+        "total": 6020.42,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0788",
+      "truth": {
+        "vendor": "Drift Supply",
+        "date": "2024-11-13",
+        "total": 8521.37,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Drift Supply\",\n  \"date\": \"2024-11-13\",\n  \"total\": 197.75,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Drift Supply\", \"date\": \"2024-11-13\", \"total\": 8521.37, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Drift Supply",
+        "date": "2024-11-13",
+        "total": 8521.37,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0789",
+      "truth": {
+        "vendor": "Quarry Materials",
+        "date": "2024-01-30",
+        "total": 7897.11,
+        "currency": "USD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Quarry Materials\",\n  \"date\": \"2024-01-30\",\n  \"total\": 140.00,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Quarry Materials\", \"date\": \"2024-01-30\", \"total\": 7897.11, \"currency\": \"USD\"}",
+      "adapter_parsed": {
+        "vendor": "Quarry Materials",
+        "date": "2024-01-30",
+        "total": 7897.11,
+        "currency": "USD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0790",
+      "truth": {
+        "vendor": "Vantage Systems",
+        "date": "2026-05-04",
+        "total": 7949.45,
+        "currency": "USD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Vantage Systems\",\n  \"date\": \"2026-05-04\",\n  \"total\": 3227.01,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"vendor\": \"Vantage Systems\",\n  \"date\":",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Vantage Systems\", \"date\": \"2026-05-04\", \"total\": 7949.45, \"currency\": \"USD\"}",
+      "adapter_parsed": {
+        "vendor": "Vantage Systems",
+        "date": "2026-05-04",
+        "total": 7949.45,
+        "currency": "USD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0791",
+      "truth": {
+        "vendor": "Pinecrest Trading",
+        "date": "2024-06-19",
+        "total": 1148.98,
+        "currency": "GBP"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Pinecrest Trading\",\n  \"date\": \"2024-06-19\",\n  \"total\": 1148.98,\n  \"currency\": \"GBP\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Pinecrest Trading",
+        "date": "2024-06-19",
+        "total": 1148.98,
+        "currency": "GBP"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Pinecrest Trading\", \"date\": \"2024-06-19\", \"total\": 1148.98, \"currency\": \"GBP\"}",
+      "adapter_parsed": {
+        "vendor": "Pinecrest Trading",
+        "date": "2024-06-19",
+        "total": 1148.98,
+        "currency": "GBP"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0792",
+      "truth": {
+        "vendor": "Union Logistics",
+        "date": "2026-06-14",
+        "total": 300.69,
+        "currency": "USD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Union Logistics\",\n  \"date\": \"14/06/2026\",\n  \"total\": 300.69,\n  \"currency\": \"USD\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Union Logistics",
+        "date": "14/06/2026",
+        "total": 300.69,
+        "currency": "USD"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Union Logistics\", \"date\": \"2026-06-14\", \"total\": 300.69, \"currency\": \"USD\"}",
+      "adapter_parsed": {
+        "vendor": "Union Logistics",
+        "date": "2026-06-14",
+        "total": 300.69,
+        "currency": "USD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0793",
+      "truth": {
+        "vendor": "Alder Industrial",
+        "date": "2024-12-18",
+        "total": 8831.42,
+        "currency": "CAD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Alder Industrial\",\n  \"date\": \"2024-12-18\",\n  \"total\": 8831.42,\n  \"currency\": \"CAD\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Alder Industrial",
+        "date": "2024-12-18",
+        "total": 8831.42,
+        "currency": "CAD"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Alder Industrial\", \"date\": \"2024-12-18\", \"total\": 8831.42, \"currency\": \"CAD\"}",
+      "adapter_parsed": {
+        "vendor": "Alder Industrial",
+        "date": "2024-12-18",
+        "total": 8831.42,
+        "currency": "CAD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0794",
+      "truth": {
+        "vendor": "Granite Trading",
+        "date": "2025-01-09",
+        "total": 164.1,
+        "currency": "USD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Granite Trading\",\n  \"date\": \"2025-01-09\",\n  \"total\": 164.10,\n  \"currency\": \"USD\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Granite Trading",
+        "date": "2025-01-09",
+        "total": 164.1,
+        "currency": "USD"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Granite Trading\", \"date\": \"2025-01-09\", \"total\": 164.1, \"currency\": \"USD\"}",
+      "adapter_parsed": {
+        "vendor": "Granite Trading",
+        "date": "2025-01-09",
+        "total": 164.1,
+        "currency": "USD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0795",
+      "truth": {
+        "vendor": "Orchard Parts",
+        "date": "2024-01-21",
+        "total": 3767.22,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Orchard Parts\",\n  \"date\": \"2024-01-21\",\n  \"total\": 589.31,\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD\",\n  \"currency\": \"USD",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Orchard Parts\", \"date\": \"2024-01-21\", \"total\": 3767.22, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Orchard Parts",
+        "date": "2024-01-21",
+        "total": 3767.22,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0796",
+      "truth": {
+        "vendor": "Iron Logistics",
+        "date": "2025-05-08",
+        "total": 170.89,
+        "currency": "USD"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Iron Logistics\",\n  \"date\": \"2025-05-08\",\n  \"total\": 170.89,\n  \"currency\": \"USD\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Iron Logistics",
+        "date": "2025-05-08",
+        "total": 170.89,
+        "currency": "USD"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Iron Logistics\", \"date\": \"2025-05-08\", \"total\": 170.89, \"currency\": \"USD\"}",
+      "adapter_parsed": {
+        "vendor": "Iron Logistics",
+        "date": "2025-05-08",
+        "total": 170.89,
+        "currency": "USD"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0797",
+      "truth": {
+        "vendor": "Fathom Materials",
+        "date": "2024-05-13",
+        "total": 9478.53,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Fathom Materials\",\n  \"date\": \"2024-05-13\",\n  \"total\": 9478.53,\n  \"currency\": \"EUR\"\n}\n```",
+      "base_parsed": {
+        "vendor": "Fathom Materials",
+        "date": "2024-05-13",
+        "total": 9478.53,
+        "currency": "EUR"
+      },
+      "base_exact_match": true,
+      "adapter_answer": "{\"vendor\": \"Fathom Materials\", \"date\": \"2024-05-13\", \"total\": 9478.53, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Fathom Materials",
+        "date": "2024-05-13",
+        "total": 9478.53,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0798",
+      "truth": {
+        "vendor": "Willow Materials",
+        "date": "2026-01-08",
+        "total": 6445.56,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Willow Materials\",\n  \"date\": \"2026-01-08\",\n  \"total\": 2261.85,\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"USD",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Willow Materials\", \"date\": \"2026-01-08\", \"total\": 6445.56, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Willow Materials",
+        "date": "2026-01-08",
+        "total": 6445.56,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    },
+    {
+      "id": "D0799",
+      "truth": {
+        "vendor": "Alder Industrial",
+        "date": "2025-03-23",
+        "total": 8513.23,
+        "currency": "EUR"
+      },
+      "base_answer": "```json\n{\n  \"vendor\": \"Alder Industrial\",\n  \"date\": \"23 Mar 2025\",\n  \"total\": 3441.16,\n  \"currency\": \"EUR\",\n  \"currency\": \"USD\",\n  \"currency\": \"CAD\",\n  \"currency\": \"GBP\",\n  \"currency\": \"USD\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",\n  \"currency\": \"EUR\",",
+      "base_parsed": null,
+      "base_exact_match": false,
+      "adapter_answer": "{\"vendor\": \"Alder Industrial\", \"date\": \"2025-03-23\", \"total\": 8513.23, \"currency\": \"EUR\"}",
+      "adapter_parsed": {
+        "vendor": "Alder Industrial",
+        "date": "2025-03-23",
+        "total": 8513.23,
+        "currency": "EUR"
+      },
+      "adapter_exact_match": true
+    }
+  ],
+  "wall_seconds": 139.8
+}

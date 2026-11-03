@@ -1,0 +1,24 @@
+# LoRA fine-tune of Qwen2.5-0.5B-Instruct-4bit on synthetic invoice extraction.
+# Reproduce with: make train   (equivalent: .venv/bin/mlx_lm.lora -c config/lora_config.yaml)
+# The 4-bit base is loaded as-is; LoRA merges 16 layers, rank 8, at full precision.
+model: "mlx-community/Qwen2.5-0.5B-Instruct-4bit"
+data: "data"
+train: true
+fine_tune_type: "lora"
+optimizer: "adamw"
+mask_prompt: true
+num_layers: 16
+batch_size: 4
+iters: 600
+val_batches: 5
+learning_rate: 1.0e-4
+steps_per_report: 10
+steps_per_eval: 100
+save_every: 200
+adapter_path: "adapters"
+max_seq_length: 1024
+seed: 20261103
+lora_parameters:
+  rank: 8
+  dropout: 0.0
+  scale: 20.0
