@@ -1,5 +1,14 @@
 # lora-eval-delta
 
+
+A LoRA fine-tune of Qwen2.5-0.5B-Instruct on a synthetic structured-extraction task, evaluated before and after on the same 100 held-out documents with a deterministic verifier.
+
+**No CI workflow in this repo.** The numbers are committed run output in `results/` - measured: exact match **35/100 to 100/100**, delta **+0.650**, paired bootstrap 95% CI **[+0.55, +0.74]**; invalid JSON 61/100 to 0/100
+
+```bash
+make test
+```
+
 A LoRA fine-tune of **Qwen2.5-0.5B-Instruct** on a synthetic structured-extraction
 task, evaluated before and after on the same 100 held-out documents with a
 **deterministic verifier**. The point is the measured delta, not the adapter.
